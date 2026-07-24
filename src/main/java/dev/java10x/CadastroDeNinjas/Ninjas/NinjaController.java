@@ -9,6 +9,7 @@ import java.util.List;
 public class NinjaController {
 
     private NinjaService ninjaService;
+
     public NinjaController(NinjaService ninjaService) {
         this.ninjaService = ninjaService;
     }
@@ -35,14 +36,16 @@ public class NinjaController {
     public NinjaModel listarNinjasPorId(@PathVariable Long id) {
         return ninjaService.listarNinjasPorId(id);
     }
+
     //Alterar dados dos ninjas
-    @PutMapping("/alterar")
-    public String alterarNinjaPorId(){
-        return "Alterar ninja por id";
+    @PutMapping("/alterar/{id}")
+    public NinjaModel alterarNinjaPorId(@PathVariable Long id, @RequestBody NinjaModel ninjaAtualizado) {
+        return ninjaService.atualizarNinja(id, ninjaAtualizado);
     }
+
     //Deletar ninja (DELETE)
     @DeleteMapping("/deletar/{id}")
-    public void deletarNinjaPorId(@PathVariable Long id){
+    public void deletarNinjaPorId(@PathVariable Long id) {
         ninjaService.deletarNinjaPorId(id);
     }
 }
